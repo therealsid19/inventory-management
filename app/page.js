@@ -13,7 +13,6 @@ import {
   getDoc,
 } from 'firebase/firestore'
 
-
 const style = {
   position: 'absolute',
   top: '50%',
@@ -31,9 +30,10 @@ const style = {
 
 export default function Home() {
   const [inventory, setInventory] = useState([])
+  const [filteredInventory, setFilteredInventory] = useState([])
   const [open, setOpen] = useState(false)
   const [itemName, setItemName] = useState('')
-
+  const [searchQuery, setSearchQuery] = useState('')
 
   const updateInventory = async () => {
     const snapshot = query(collection(firestore, 'inventory'))
@@ -43,9 +43,8 @@ export default function Home() {
       inventoryList.push({ name: doc.id, ...doc.data() })
     })
     setInventory(inventoryList)
+    setFilteredInventory(inventoryList) // Initialize filteredInventory
   }
-  
-
 
   const addItem = async (item) => {
     const docRef = doc(collection(firestore, 'inventory'), item)
@@ -58,7 +57,7 @@ export default function Home() {
     }
     await updateInventory()
   }
-  
+
   const removeItem = async (item) => {
     const docRef = doc(collection(firestore, 'inventory'), item)
     const docSnap = await getDoc(docRef)
@@ -72,7 +71,7 @@ export default function Home() {
     }
     await updateInventory()
   }
-  
+
   useEffect(() => {
     updateInventory()
   }, [])
@@ -80,6 +79,14 @@ export default function Home() {
   const handleOpen = () => setOpen(true)
   const handleClose = () => setOpen(false)
 
+  const handleSearch = (query) => {
+    setSearchQuery(query)
+    if (query) {
+      setFilteredInventory(inventory.filter(item => item.name.toLowerCase().includes(query.toLowerCase())))
+    } else {
+      setFilteredInventory(inventory)
+    }
+  }
 
   return (
     <Box
@@ -123,43 +130,62 @@ export default function Home() {
           </Stack>
         </Box>
       </Modal>
-      <Button variant="contained" onClick={handleOpen}>
-        Add New Item
-      </Button>
+
       <Box border={'1px solid #333'}>
         <Box
-          width="800px"
+          width="1275px"
           height="100px"
-          bgcolor={'#ADD8E6'}
+          bgcolor={'yellow'}
           display={'flex'}
           justifyContent={'center'}
           alignItems={'center'}
+          marginBottom={2}
         >
           <Typography variant={'h2'} color={'#333'} textAlign={'center'}>
             Inventory Items
           </Typography>
         </Box>
-        <Stack width="800px" height="300px" spacing={2} overflow={'auto'}>
-          {inventory.map(({name, quantity}) => (
+        <Box>
+          <Stack direction={'row'} spacing={4} alignItems={'center'} justifyContent={'flex-end'}>
+            <TextField
+              id="search-bar"
+              label="Search Items"
+              variant="outlined"
+              value={searchQuery}
+              onChange={(e) => handleSearch(e.target.value)}
+              sx={{ width: '350px' }} // Adjust the width here
+            />
+            <Button variant="contained" onClick={handleOpen}>
+              Add New Item
+            </Button>
+          </Stack>
+        </Box>
+        <Stack width="1275px" height="375px" spacing={2} overflow={'auto'} paddingX={2}>
+          {filteredInventory.map(({ name, quantity }) => (
             <Box
               key={name}
               width="100%"
-              minHeight="150px"
+              minHeight="110px"
               display={'flex'}
               justifyContent={'space-between'}
               alignItems={'center'}
               bgcolor={'#f0f0f0'}
               paddingX={5}
             >
-              <Typography variant={'h3'} color={'#333'} textAlign={'center'}>
+              <Typography variant={'h6'} color={'#333'} textAlign={'center'} sx={{ fontSize: '20px' }}>
                 {name.charAt(0).toUpperCase() + name.slice(1)}
               </Typography>
-              <Typography variant={'h3'} color={'#333'} textAlign={'center'}>
-                Quantity: {quantity}
-              </Typography>
-              <Button variant="contained" onClick={() => removeItem(name)}>
-                Remove
-              </Button>
+              <Stack direction={'row'} spacing={2} alignItems={'center'}>
+                <Button variant="contained" onClick={() => addItem(name)}>
+                  +
+                </Button>
+                <Typography variant={'h5'} color={'#333'} textAlign={'center'}>
+                  {quantity}
+                </Typography>
+                <Button variant="contained" onClick={() => removeItem(name)}>
+                  -
+                </Button>
+              </Stack>
             </Box>
           ))}
         </Stack>
