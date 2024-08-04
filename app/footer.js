@@ -7,17 +7,17 @@ export default function Footer() {
     <Box
       padding={4}
       height={'150px'}
-      width="100%"
+      width="87%"
       display="flex"
       flexDirection="column"
       alignItems="center"
-      marginLeft={'-32px'}
-      marginBottom={'-122px'}
 
-      sx={{
-        borderTop: '1px solid #ddd',
-        background: '#f5f5f5',
-      }}
+      
+        marginTop={'160px'}
+        marginBottom={'-8px'}
+        marginRight={'-100px'}
+        marginLeft={'70px'}
+       
       
     >
       <Box display="flex" gap={2} marginBottom={1}>

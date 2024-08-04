@@ -26,20 +26,26 @@ export default function SignIn() {
       height="100vh"
       display="flex"
       justifyContent="center"
-      alignItems="center"
+      alignItems="left"
       flexDirection="column"
       gap={2}
       sx={{
-        backgroundImage: `url('/im-bg.png')`, // Use your background image
+        backgroundImage: `url('im-bg-2.png')`, // Use your background image
         backgroundwidth: '100%',
         backgroundSize: 'cover',
         width: '101.3%',
         backgroundPosition: 'center',
         color: 'white',
         marginLeft: '-8px',
+        height: '110vh',
+        marginBottom: '-10px',
+        
       }}
     >
-      <Typography variant="h4" gutterBottom>
+      <Box
+      marginLeft={'170px'}>
+    
+      <Typography variant="h4" marginBottom={'30px'}>
         Sign In
       </Typography>
       {error && <Typography color="error">{error}</Typography>}
@@ -48,10 +54,11 @@ export default function SignIn() {
         color="primary" 
         onClick={handleSignIn}
         startIcon={<FaGoogle />} // Add Google icon to the button
-        sx={{ display: 'flex', alignItems: 'center' }}
+        sx={{ display: 'flex'}}
       >
         Sign In with Google
       </Button>
+      </Box>
     </Box>
   );
 }

@@ -22,7 +22,6 @@ export default function RootLayout({ children }) {
     <html lang="en">
       <body>
         <Box>
-          {/* Navbar */}
           {!user && (
             <Box
               display="flex"
@@ -38,18 +37,17 @@ export default function RootLayout({ children }) {
               marginLeft={'-8px'}
             >
               <Link href="/" style={{ textDecoration: 'none', color: 'white' }}>
-                <Typography variant="h6" sx={{ marginLeft: 2 }}>
-                  IM
-                </Typography>
+              <Box sx={{ marginLeft: 2, display: 'flex', alignItems: 'center' }}>
+                <img src="bg-logo-2.png" alt="IM Logo" style={{ height: '40px' }} />
+              </Box>
               </Link>
-              <Button variant="outlined" color="inherit" sx={{ marginRight: 2 }}>
+              <Button variant="outlined" color="inherit" sx={{ marginRight: 5 }}>
                 <Link href="/signin" style={{ textDecoration: 'none', color: 'white' }}>
                   Sign In
                 </Link>
               </Button>
             </Box>
           )}
-          {/* Main Content */}
           <Box marginTop={!user ? "64px" : "0"}> 
             {children}
           </Box>

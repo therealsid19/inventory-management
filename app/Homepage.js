@@ -14,13 +14,27 @@ export default function Homepage() {
     <Box
       display="flex"
       flexDirection="column"
-      minHeight="100vh"
+      minHeight="120vh"
       padding={4}
+      /*
       sx={{
         background: 'linear-gradient(to right, #ff7e5f, #feb47b)', // Example gradient
         paddingBottom: '100px', // Space for the fixed footer
         marginLeft: '-8px',
         width:'96.1%'
+      }}
+      */
+      sx={{
+        backgroundImage: `url('/im-bg-home.png')`, // Use your background image
+        backgroundwidth: '100%',
+        marginBottom: '-8px',
+      
+        backgroundSize: 'cover',
+        width: '96.1%',
+        height: '125vh',
+        backgroundPosition: 'center',
+        color: 'white',
+        marginLeft: '-8px',
       }}
     >
       <Box
@@ -29,9 +43,10 @@ export default function Homepage() {
         justifyContent="center"
         alignItems="center"
         flexDirection="column"
-        marginBottom={2}
+        marginBottom={13}
+
       >
-        <Typography variant="h1" gutterBottom>
+        <Typography variant="h1" marginTop={'40px'} marginBottom={'20px'}>
           Welcome to Inventory Management
         </Typography>
         <Typography variant="h6" color="textSecondary" paragraph>
