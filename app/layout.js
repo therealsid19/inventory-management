@@ -38,9 +38,9 @@ export default function RootLayout({ children }) {
               marginLeft={'-8px'}
             >
               <Link href="/" style={{ textDecoration: 'none', color: 'white' }}>
-              <Box sx={{ marginLeft: 2, display: 'flex', alignItems: 'center' }}>
-                <img src="bg-logo-2.png" alt="IM Logo" style={{ height: '40px' }} />
-              </Box>
+                <Box sx={{ marginLeft: 2, display: 'flex', alignItems: 'center' }}>
+                  <img src="bg-logo-2.png" alt="IM Logo" style={{ height: '40px' }} />
+                </Box>
               </Link>
               <Button variant="outlined" color="inherit" sx={{ marginRight: 5 }}>
                 <Link href="/signin" style={{ textDecoration: 'none', color: 'white' }}>
@@ -53,6 +53,7 @@ export default function RootLayout({ children }) {
             {children}
           </Box>
         </Box>
+        <Analytics /> {/* Place the Analytics component here */}
       </body>
     </html>
   );
