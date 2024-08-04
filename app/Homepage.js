@@ -1,7 +1,6 @@
-// app/homepage.js
 'use client';
-import { useRouter } from 'next/navigation';
 import { Box, Button, Typography } from '@mui/material';
+import { useRouter } from 'next/navigation';
 
 export default function Homepage() {
   const router = useRouter();
@@ -12,18 +11,22 @@ export default function Homepage() {
 
   return (
     <Box
-      width="100vw"
-      height="100vh"
-      display={'flex'}
-      justifyContent={'center'}
-      alignItems={'center'}
-      flexDirection={'column'}
-      gap={2}
+      width="94vw"
+      height="75vh"
+      display="flex"
+      justifyContent="center"
+      alignItems="center"
+      flexDirection="column"
+      bgcolor="#f5f5f5" // Light gray background
+      padding={4}
     >
-      <Typography variant="h2">Welcome to Inventory Management</Typography>
-      <Button variant="contained" color="primary" onClick={navigateToInventory}>
-        Go to Inventory
-      </Button>
+      <Typography variant="h1" gutterBottom>
+        Welcome to Inventory Management
+      </Typography>
+      <Typography variant="h6" color="textSecondary" paragraph>
+        Manage your inventory with ease and efficiency. Add, remove, and track items in real-time.
+      </Typography>
+
     </Box>
   );
 }

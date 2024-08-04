@@ -107,8 +107,8 @@ export default function Inventory() {
 
   return (
     <Box
-      width="100vw"
-      height="96vh"
+      width="98.5%"
+      height="94vh"
       display={'flex'}
       justifyContent={'center'}
       flexDirection={'column'}
@@ -150,7 +150,7 @@ export default function Inventory() {
 
       <Box border={'1px solid #333'}>
         <Box
-          width="1275px"
+          width="1291px"
           height="100px"
           bgcolor={'yellow'}
           display={'flex'}
@@ -183,11 +183,11 @@ export default function Inventory() {
             </Button>
           </Stack>
           
-        <Stack width="1275px" height="375px" spacing={2} overflow={'auto'} paddingX={2}>
+        <Stack width="1260px" height="375px" spacing={2} overflow={'auto'} paddingX={2}>
           {filteredInventory.map(({ name, quantity }) => (
             <Box
               key={name}
-              width="100%"
+              width="93.5%"
               minHeight="110px"
               display={'flex'}
               justifyContent={'space-between'}
