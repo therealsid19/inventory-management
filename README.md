@@ -1,22 +1,21 @@
-** Introduction **
 # Inventory Management System
 
 Welcome to the **Inventory Management System**, a modern solution for managing your inventory online. This project is built with [Next.js](https://nextjs.org/) and Firebase, offering a user-friendly interface for inventory tracking.
 
 ![Inventory Management System](![image](https://github.com/user-attachments/assets/f481c21f-be82-4e80-a707-1aec46a2501b)) <!-- Replace with your website's homepage image link -->
 
-** Live Demo **
+## Live Demo
 
 Explore the live site here: [**Inventory Management System**](https://inventory-management-ten-tan.vercel.app/)
 
-** Features **
+## Features
 
 - **User Authentication:** Sign in with Google to access your personalized inventory list.
 - **Manage Inventory:** Add, delete, and update items and quantities.
 - **Search Functionality:** Quickly find items in your inventory.
 - **Real-Time Updates:** Enjoy instant updates with Firebase integration.
 
-** Getting Started **
+# Getting Started
 
 If you want to run this project locally, follow these instructions:
 
