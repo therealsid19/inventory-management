@@ -5,6 +5,7 @@ import Link from 'next/link';
 import { auth } from '@/firebase'; 
 import { onAuthStateChanged } from 'firebase/auth';
 import { useRouter } from 'next/navigation';
+import { Analytics } from "@vercel/analytics/react";
 
 export default function RootLayout({ children }) {
   const [user, setUser] = useState(null);
