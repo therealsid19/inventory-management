@@ -2,7 +2,8 @@
 
 Welcome to the **Inventory Management System**, a modern solution for managing your inventory online. This project is built with [Next.js](https://nextjs.org/) and Firebase, offering a user-friendly interface for inventory tracking.
 
-![Inventory Management System](public/web.png) <!-- Reference to the image in the public folder -->
+![image](https://github.com/user-attachments/assets/4ebf3791-f39e-4a48-ac8a-b9ba22730777)
+
 
 
 ## Live Demo
