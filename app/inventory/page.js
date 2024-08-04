@@ -2,7 +2,7 @@
 import { useEffect, useState } from 'react';
 import { Box, Stack, Typography, Button, Modal, TextField } from '@mui/material';
 import { collection, doc, getDocs, query, setDoc, deleteDoc, getDoc } from 'firebase/firestore';
-import { firestore, auth } from '@/firebase'; // Adjust path if necessary
+import { firestore, auth } from '@/firebase'; 
 import { useRouter } from 'next/navigation';
 import { signOut } from 'firebase/auth';
 
@@ -28,59 +28,77 @@ export default function Inventory() {
   const [itemName, setItemName] = useState('');
   const [searchQuery, setSearchQuery] = useState('');
   const router = useRouter();
+  const [user, setUser] = useState(null);
 
   useEffect(() => {
-    updateInventory();
-  }, [router]);
+    const unsubscribe = auth.onAuthStateChanged((currentUser) => {
+      setUser(currentUser);
+    });
+
+    return () => unsubscribe();
+  }, []);
+
+  useEffect(() => {
+    if (user) {
+      updateInventory();
+    }
+  }, [user]);
 
   const updateInventory = async () => {
-    try {
-      console.log('Fetching inventory data...');
-      const snapshot = query(collection(firestore, 'inventory'));
-      const docs = await getDocs(snapshot);
-      const inventoryList = [];
-      docs.forEach((doc) => {
-        inventoryList.push({ name: doc.id, ...doc.data() });
-      });
-      console.log('Fetched inventory data:', inventoryList);
-      setInventory(inventoryList);
-      setFilteredInventory(inventoryList);
-    } catch (error) {
-      console.error('Error fetching inventory:', error);
+    if (user) {
+      try {
+        console.log('Fetching inventory data...');
+        const userInventoryRef = collection(firestore, 'users', user.uid, 'inventory');
+        const snapshot = query(userInventoryRef);
+        const docs = await getDocs(snapshot);
+        const inventoryList = [];
+        docs.forEach((doc) => {
+          inventoryList.push({ name: doc.id, ...doc.data() });
+        });
+        console.log('Fetched inventory data:', inventoryList);
+        setInventory(inventoryList);
+        setFilteredInventory(inventoryList);
+      } catch (error) {
+        console.error('Error fetching inventory:', error);
+      }
     }
   };
 
   const addItem = async (item) => {
-    try {
-      const docRef = doc(collection(firestore, 'inventory'), item);
-      const docSnap = await getDoc(docRef);
-      if (docSnap.exists()) {
-        const { quantity } = docSnap.data();
-        await setDoc(docRef, { quantity: quantity + 1 });
-      } else {
-        await setDoc(docRef, { quantity: 1 });
+    if (user) {
+      try {
+        const userInventoryRef = doc(collection(firestore, 'users', user.uid, 'inventory'), item);
+        const docSnap = await getDoc(userInventoryRef);
+        if (docSnap.exists()) {
+          const { quantity } = docSnap.data();
+          await setDoc(userInventoryRef, { quantity: quantity + 1 });
+        } else {
+          await setDoc(userInventoryRef, { quantity: 1 });
+        }
+        await updateInventory();
+      } catch (error) {
+        console.error('Error adding item:', error);
       }
-      await updateInventory();
-    } catch (error) {
-      console.error('Error adding item:', error);
     }
   };
 
   const removeItem = async (item) => {
-    try {
-      const docRef = doc(collection(firestore, 'inventory'), item);
-      const docSnap = await getDoc(docRef);
-      if (docSnap.exists()) {
-        const { quantity } = docSnap.data();
-        if (quantity === 1) {
-          await deleteDoc(docRef);
-        } else {
-          await setDoc(docRef, { quantity: quantity - 1 });
+    if (user) {
+      try {
+        const userInventoryRef = doc(collection(firestore, 'users', user.uid, 'inventory'), item);
+        const docSnap = await getDoc(userInventoryRef);
+        if (docSnap.exists()) {
+          const { quantity } = docSnap.data();
+          if (quantity === 1) {
+            await deleteDoc(userInventoryRef);
+          } else {
+            await setDoc(userInventoryRef, { quantity: quantity - 1 });
+          }
         }
+        await updateInventory();
+      } catch (error) {
+        console.error('Error removing item:', error);
       }
-      await updateInventory();
-    } catch (error) {
-      console.error('Error removing item:', error);
     }
   };
 
@@ -99,7 +117,7 @@ export default function Inventory() {
   const handleSignOut = async () => {
     try {
       await signOut(auth);
-      router.push('/'); // Redirect to homepage after sign-out
+      router.push('/'); 
     } catch (error) {
       console.error('Error signing out:', error);
     }
@@ -162,27 +180,27 @@ export default function Inventory() {
             Inventory Items
           </Typography>
         </Box>
-          <Stack direction={'row'} spacing={4} alignItems={'center'} justifyContent={'center'} marginBottom={'20px'}>
-            <Box>
+        <Stack direction={'row'} spacing={4} alignItems={'center'} justifyContent={'center'} marginBottom={'20px'}>
+          <Box>
             <TextField
               id="search-bar"
               label="Search Items"
               variant="outlined"
               value={searchQuery}
               onChange={(e) => handleSearch(e.target.value)}
-              sx={{ width: '350px'}} // Adjust the width here
+              sx={{ width: '350px'}} 
             />
-            </Box>
-            <Box>
-          <Button variant="contained" onClick={handleOpen}>
-            Add New Item
-          </Button>
-            </Box>
-            <Button variant="contained" color="secondary" onClick={handleSignOut}>
-              Sign Out
+          </Box>
+          <Box>
+            <Button variant="contained" onClick={handleOpen}>
+              Add New Item
             </Button>
-          </Stack>
-          
+          </Box>
+          <Button variant="contained" color="secondary" onClick={handleSignOut}>
+            Sign Out
+          </Button>
+        </Stack>
+
         <Stack width="1260px" height="375px" spacing={2} overflow={'auto'} paddingX={2}>
           {filteredInventory.map(({ name, quantity }) => (
             <Box
