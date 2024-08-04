@@ -32,7 +32,7 @@ export default function Footer() {
         </Link>
       </Box>
       <Typography variant="body2" color="textSecondary">
-        © 2024 Pantry Manager. All rights reserved.
+        © 2024 Inventory Manager. All rights reserved.
       </Typography>
     </Box>
   );
