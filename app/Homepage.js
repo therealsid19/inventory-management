@@ -1,6 +1,7 @@
 'use client';
 import { Box, Button, Typography } from '@mui/material';
 import { useRouter } from 'next/navigation';
+import Footer from './footer'; // Adjust the path if necessary
 
 export default function Homepage() {
   const router = useRouter();
@@ -11,22 +12,37 @@ export default function Homepage() {
 
   return (
     <Box
-      width="94vw"
-      height="75vh"
+     width="93.6vw"
+      height="100vh"
       display="flex"
-      justifyContent="center"
-      alignItems="center"
       flexDirection="column"
-      bgcolor="#f5f5f5" // Light gray background
+      minHeight="110vh"
       padding={4}
+      sx={{
+        background: 'linear-gradient(to right, #ff7e5f, #feb47b)', // Example gradient
+      }}
+      marginLeft={'-8px'}
+  
     >
-      <Typography variant="h1" gutterBottom>
-        Welcome to Inventory Management
-      </Typography>
-      <Typography variant="h6" color="textSecondary" paragraph>
-        Manage your inventory with ease and efficiency. Add, remove, and track items in real-time.
-      </Typography>
+      <Box
+        flex="1"
+        display="flex"
+        justifyContent="center"
+        alignItems="center"
+        flexDirection="column"
+        marginBottom={2}
+      >
+        <Typography variant="h1" gutterBottom>
+          Welcome to Inventory Management
+        </Typography>
+        <Typography variant="h6" color="textSecondary" paragraph>
+          Manage your inventory with ease and efficiency. Add, remove, and track items in real-time.
+        </Typography>
 
+      </Box>
+
+      {/* Include the Footer component */}
+      <Footer />
     </Box>
   );
 }
