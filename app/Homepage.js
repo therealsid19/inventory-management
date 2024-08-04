@@ -12,17 +12,16 @@ export default function Homepage() {
 
   return (
     <Box
-     width="93.6vw"
-      height="100vh"
       display="flex"
       flexDirection="column"
-      minHeight="110vh"
+      minHeight="100vh"
       padding={4}
       sx={{
         background: 'linear-gradient(to right, #ff7e5f, #feb47b)', // Example gradient
+        paddingBottom: '100px', // Space for the fixed footer
+        marginLeft: '-8px',
+        width:'96.1%'
       }}
-      marginLeft={'-8px'}
-  
     >
       <Box
         flex="1"

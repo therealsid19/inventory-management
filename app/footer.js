@@ -5,11 +5,15 @@ import { FaGithub, FaLinkedin, FaInstagram } from 'react-icons/fa';
 export default function Footer() {
   return (
     <Box
-      padding={2}
+      padding={4}
+      height={'150px'}
+      width="100%"
       display="flex"
       flexDirection="column"
       alignItems="center"
-      justifyContent="center"
+      marginLeft={'-32px'}
+      marginBottom={'-122px'}
+
       sx={{
         borderTop: '1px solid #ddd',
         background: '#f5f5f5',

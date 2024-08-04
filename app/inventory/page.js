@@ -132,6 +132,8 @@ export default function Inventory() {
       flexDirection={'column'}
       alignItems={'center'}
       gap={2}
+
+
     >
       <Modal
         open={open}
@@ -170,13 +172,13 @@ export default function Inventory() {
         <Box
           width="1291px"
           height="100px"
-          bgcolor={'yellow'}
+          bgcolor="#1976d2"
           display={'flex'}
           justifyContent={'center'}
           alignItems={'center'}
           marginBottom={2}
         >
-          <Typography variant={'h2'} color={'#333'} textAlign={'center'}>
+          <Typography variant={'h2'} color={'white'} textAlign={'center'}>
             Inventory Items
           </Typography>
         </Box>
@@ -217,14 +219,14 @@ export default function Inventory() {
                 {name.charAt(0).toUpperCase() + name.slice(1)}
               </Typography>
               <Stack direction={'row'} spacing={2} alignItems={'center'}>
-                <Button variant="contained" onClick={() => addItem(name)}>
-                  +
+              <Button variant="contained" onClick={() => removeItem(name)}>
+                  -
                 </Button>
                 <Typography variant={'h5'} color={'#333'} textAlign={'center'}>
                   {quantity}
                 </Typography>
-                <Button variant="contained" onClick={() => removeItem(name)}>
-                  -
+                <Button variant="contained" onClick={() => addItem(name)}>
+                  +
                 </Button>
               </Stack>
             </Box>

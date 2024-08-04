@@ -4,7 +4,7 @@ import { useState } from 'react';
 import { Box, Button, Typography } from '@mui/material';
 import { signInWithPopup } from 'firebase/auth';
 import { auth, provider } from '@/firebase'; 
-import {FaGoogle} from 'react-icons/fa';
+import { FaGoogle } from 'react-icons/fa';
 
 export default function SignIn() {
   const router = useRouter();
@@ -22,19 +22,22 @@ export default function SignIn() {
 
   return (
     <Box
-      width="97.4%"
-      height="78.4vh"
+      width="100%"
+      height="100vh"
       display="flex"
       justifyContent="center"
       alignItems="center"
       flexDirection="column"
       gap={2}
-      padding={3}
       sx={{
-        background: 'linear-gradient(to right, #00c6ff, #0072ff)', // Blue gradient
-        color: 'white'
+        backgroundImage: `url('/im-bg.png')`, // Use your background image
+        backgroundwidth: '100%',
+        backgroundSize: 'cover',
+        width: '101.3%',
+        backgroundPosition: 'center',
+        color: 'white',
+        marginLeft: '-8px',
       }}
-      marginLeft={'-8px'}
     >
       <Typography variant="h4" gutterBottom>
         Sign In
