@@ -222,9 +222,14 @@ export default function Inventory() {
               <Button variant="contained" onClick={() => removeItem(name)}>
                   -
                 </Button>
-                <Typography variant={'h5'} color={'#333'} textAlign={'center'}>
-                  {quantity}
-                </Typography>
+                <Typography
+          variant={'h5'}
+          color={'#333'}
+          textAlign={'center'}
+          sx={{ width: '32px', textAlign: 'center' }} 
+        >
+          {quantity}
+        </Typography>
                 <Button variant="contained" onClick={() => addItem(name)}>
                   +
                 </Button>
